@@ -1,0 +1,29 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="microgame"
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 0)
+boot_splash/image="res://logo/MythrilLabs_jank.png"
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=512
+window/size/viewport_height=512
+window/size/resizable=false
+window/per_pixel_transparency/allowed=true
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.848953, 0.676138, 0.419814, 1)
