@@ -48,7 +48,7 @@ shape = SubResource("CircleShape2D_eonxe")
 scale = Vector2(0.75, 0.75)
 script = ExtResource("4_v00hs")
 
-[node name="Timer" type="Timer" parent="CatchableController"]
+[node name="SpawnTimer" type="Timer" parent="CatchableController"]
 wait_time = 0.333
 
 [node name="Container" type="Node2D" parent="CatchableController"]
