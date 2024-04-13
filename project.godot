@@ -11,11 +11,15 @@ config_version=5
 [application]
 
 config/name="microgame"
-run/main_scene="res://main.tscn"
+run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-boot_splash/bg_color=Color(0, 0, 0, 0)
+boot_splash/bg_color=Color(0.847059, 0.67451, 0.419608, 1)
 boot_splash/image="res://logo/MythrilLabs_jank.png"
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://global.gd"
 
 [display]
 

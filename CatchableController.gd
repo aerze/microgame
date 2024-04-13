@@ -8,8 +8,12 @@ const TRAP_TEXTURE = preload("res://assets/catchables4.png");
 
 const MAP_SIZE = 512;
 const SPEED = 1.5;
-const MISSED_CLICK = -25;
 
+@export_category("Points")
+@export var MISSED_CLICK = -25;
+@export var LOST_CATCHABLE = -100;
+
+@onready var main: Node2D = $".."
 @onready var hand_area: Area2D = $"../HandSprite2D/Area2D";
 @onready var label: Label = $"../Control/Points";
 @onready var container: Node2D = $Container;
@@ -22,7 +26,7 @@ var points = 0;
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawn_timer.timeout.connect(handle_spawn);
-	spawn_timer.start();
+	#spawn_timer.start();
 	return;
 
 func handle_spawn():
@@ -33,11 +37,11 @@ func handle_spawn():
 
 # incentivize clicking late, add a bonus like points += catchable.position.distance_to(center) *.5 - fubar
 func _input(event: InputEvent) -> void:
-	if (event is InputEventMouseButton):
+	if (main.phase == Main.PHASE.PLAY && event is InputEventMouseButton):
 		if (event.button_index == 1 && event.pressed):
 			var areas: Array[Area2D] = hand_area.get_overlapping_areas() as Array[Area2D];
 			if (areas.size() == 0):
-				points -= MISSED_CLICK;
+				points += MISSED_CLICK;
 			else:
 				for area in areas:
 					var catchable: Catchable = area.get_parent();
@@ -54,7 +58,7 @@ func _process(delta: float) -> void:
 			catchable.position.x > MAP_SIZE ||
 			catchable.position.y < 0 ||
 			catchable.position.y > MAP_SIZE):
-			points -= 25;
+			points += LOST_CATCHABLE;
 			label.text = str(points);
 			delete_catchable(catchable);
 			return;
@@ -72,4 +76,9 @@ func create_catchable() -> Catchable:
 func delete_catchable(catchable: Catchable) -> void:
 	catchableSprites.remove_at(catchableSprites.find(catchable));
 	catchable.queue_free();
+	return;
+
+func delete_all() -> void:
+	for catchable in catchableSprites:
+		delete_catchable(catchable);
 	return;
