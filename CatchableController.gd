@@ -17,7 +17,6 @@ const SPEED = 1.5;
 
 var textures = [BUG_TEXTURE, YARN_TEXTURE, CACTUS_TEXTURE, TRAP_TEXTURE];
 var catchableSprites = [];
-var hover_handing: Catchable = null;
 var points = 0;
 
 # Called when the node enters the scene tree for the first time.
@@ -31,14 +30,6 @@ func handle_spawn():
 	catchableSprites.push_front(catchable);
 	container.add_child(catchable);
 	return;
-
-func handle_mouse_enter(node: Node2D):
-	hover_handing = node;
-	pass;
-
-func handle_mouse_exit(node: Node2D):
-	hover_handing = null;
-	pass;
 
 # incentivize clicking late, add a bonus like points += catchable.position.distance_to(center) *.5 - fubar
 func _input(event: InputEvent) -> void:
@@ -87,8 +78,6 @@ func create_catchable() -> Catchable:
 	catchable.position.y = randi_range(128, 384);
 	catchable.speed = randi_range(1.5, 2.5);
 	var area2d: Area2D = catchable.get_node("Area2D") as Area2D;
-	area2d.mouse_entered.connect(handle_mouse_enter.bind(catchable));
-	area2d.mouse_exited.connect(handle_mouse_exit.bind(catchable));
 	return catchable;
 
 func delete_catchable(catchable: Catchable) -> void:
