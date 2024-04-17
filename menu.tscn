@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b35o3h422pupi"]
+[gd_scene load_steps=4 format=3 uid="uid://b35o3h422pupi"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_xr0vm"]
+[ext_resource type="Texture2D" uid="uid://dyo5lclrrmwv4" path="res://assets/grabtastic_logo.png" id="2_p3bfd"]
+[ext_resource type="AudioStream" uid="uid://vd2afqyomau6" path="res://assets/Reminisce.mp3" id="3_qwpwr"]
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_xr0vm")
@@ -34,3 +36,11 @@ text = "Start"
 [node name="ExitButton" type="Button" parent="CanvasLayer/Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
+
+[node name="GrabtasticLogo" type="Sprite2D" parent="."]
+texture = ExtResource("2_p3bfd")
+centered = false
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qwpwr")
+autoplay = true

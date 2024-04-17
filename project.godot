@@ -16,6 +16,7 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(0.847059, 0.67451, 0.419608, 1)
 boot_splash/image="res://logo/MythrilLabs_jank.png"
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=1500
 
 [autoload]
 

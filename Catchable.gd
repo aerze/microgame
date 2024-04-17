@@ -27,7 +27,7 @@ func _ready() -> void:
 		Type.YARN:
 			default_points = 50;
 			direction = Vector2(randf_range(-1, 1), randf_range(-1, 1));
-			speed = randf_range(4, 6);
+			speed = randf_range(3, 5);
 	return;
 
 func _process(delta: float) -> void:

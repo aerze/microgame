@@ -11,10 +11,13 @@ const LOWER_LEFT = Vector2(512, 0);
 @onready var start_timer: Timer = $StartTimer
 @onready var countdown_timer: Timer = $CountdownTimer
 @onready var reset_button: Button = $Control/ResetButton
+@onready var tweet_button: Button = $Control/TweetButton
 
 @onready var countdown_label: Label = $Control/Countdown
 
 enum PHASE {START, STARTED, PLAY, END};
+
+#
 
 var isGrabbing = false;
 var phase = PHASE.START;
@@ -23,6 +26,7 @@ var phase = PHASE.START;
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN);
 
+	tweet_button.pressed.connect(handle_tweet_button);
 	start_timer.timeout.connect(handle_start_end, CONNECT_ONE_SHOT);
 	start_timer.start();
 	pass # Replace with function body.
@@ -54,15 +58,25 @@ func handle_countdown_end():
 	reset_button.pressed.connect(handle_reset_button, CONNECT_ONE_SHOT);
 	reset_button.show();
 
+	tweet_button.show();
+
 	return;
 
 func handle_reset_button():
 	phase = PHASE.START;
+
+	tweet_button.show();
 	reset_button.hide();
 
+	catchable_controller.points = 0;
 	start_timer.wait_time = 3;
 	start_timer.timeout.connect(handle_start_end, CONNECT_ONE_SHOT);
 	start_timer.start();
+	return;
+
+const TWEET_STRING = "https://twitter.com/intent/tweet?text=I%%20grabbed%%20this%%20many!%%20%s!"
+func handle_tweet_button():
+	OS.shell_open(TWEET_STRING % catchable_controller.points);
 	return;
 
 func _input(event: InputEvent) -> void:

@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1gj23kl7bihy"]
+[gd_scene load_steps=8 format=3 uid="uid://b1gj23kl7bihy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_03hwh"]
 [ext_resource type="Texture2D" uid="uid://w0ps1s2rdbau" path="res://assets/hand1.png" id="1_cidvi"]
 [ext_resource type="Texture2D" uid="uid://twq488q2ja3r" path="res://assets/arm.png" id="3_ogpmm"]
 [ext_resource type="Script" path="res://CatchableController.gd" id="4_v00hs"]
+[ext_resource type="AudioStream" uid="uid://vd2afqyomau6" path="res://assets/Reminisce.mp3" id="5_f7wx5"]
+[ext_resource type="AudioStream" uid="uid://cgh6h6vrhukii" path="res://assets/sfx/miss.wav" id="6_aen2b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eonxe"]
 radius = 37.3571
@@ -46,6 +48,15 @@ offset_bottom = 489.0
 text = "RESET
 "
 
+[node name="TweetButton" type="Button" parent="Control"]
+visible = false
+offset_left = 23.0
+offset_top = 458.0
+offset_right = 186.0
+offset_bottom = 489.0
+text = "TWEET YOUR SCORE
+"
+
 [node name="HandSprite2D" type="Sprite2D" parent="."]
 position = Vector2(-74, 0)
 scale = Vector2(0.75, 0.75)
@@ -71,7 +82,7 @@ scale = Vector2(0.75, 0.75)
 script = ExtResource("4_v00hs")
 
 [node name="SpawnTimer" type="Timer" parent="CatchableController"]
-wait_time = 0.333
+wait_time = 0.25
 
 [node name="Container" type="Node2D" parent="CatchableController"]
 scale = Vector2(1.33333, 1.33333)
@@ -81,5 +92,14 @@ wait_time = 3.0
 one_shot = true
 
 [node name="CountdownTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
 one_shot = true
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_f7wx5")
+autoplay = true
+
+[node name="MissSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_aen2b")
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="."]
